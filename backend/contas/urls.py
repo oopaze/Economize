@@ -1,9 +1,17 @@
 from django.urls import path
-from .views import ContaCreateView, ContaListView, ContaDeleteView, ContaUpdateView
+from .views import (
+    ContaCreateView, 
+    ContaListView, 
+    ContaDeleteView, 
+    ParcelasListView
+)
 
 urlpatterns = [
+    ## Contas
     path('', ContaListView.as_view(), name='listar-contas'),
     path('add/', ContaCreateView.as_view(), name='create-conta'),
-    path('edit/<int:pk>', ContaUpdateView.as_view(), name='update-conta'),
     path('delete/<int:pk>', ContaDeleteView.as_view(), name='deletar-conta'),
+
+    ## Contas Por Mês
+    path('mes/', ParcelasListView.as_view(), name='listar-parcelas'),
 ]

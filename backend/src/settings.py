@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'contas',
     'tabelas',
-    'usuario'
+    'usuario',
 ]
 
 MIDDLEWARE = [
@@ -80,6 +80,13 @@ WSGI_APPLICATION = 'src.wsgi.application'
 
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'storage.db'
+    }
+}
+
+"""DATABASES = {
+    'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': os.environ.get('DB_NAME', 'economize'),
         'USER': os.environ.get('DB_USER', 'postgres'),
@@ -87,7 +94,7 @@ DATABASES = {
         'HOST': os.environ.get('DB_HOST', 'localhost'),
         'PORT': os.environ.get('DB_PORT', '5432')
     }
-}
+}"""
 
 
 # Password validation
