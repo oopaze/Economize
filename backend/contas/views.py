@@ -71,6 +71,8 @@ class ParcelasListView(ListAPIView):
     queryset = Parcelamento.objects.all()
     serializer_class = ParcelasSerializer
     permission_classes = [IsAuthenticated]
+    paginate_by = 20
+
 
     def get_queryset(self, *args, **kwargs):
         qs = super().get_queryset(*args, **kwargs)

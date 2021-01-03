@@ -9,6 +9,7 @@ class UserListView(ListAPIView):
     queryset = Usuario.objects.all()
     serializer_class = UsuarioReadSerializer
     permission_classes = [IsAdminUser]
+    paginate_by = 10
 
 
 class UserDeleteView(DestroyAPIView):
@@ -39,6 +40,15 @@ class UserCreateView(CreateAPIView):
         )
         user.set_password(serializer.data.get('password', None))
         user.save()
+
+    def post(self, request, *args, **kwargs):
+        user = self.get_queryset().first()
+        serializer = self.serializer_class(user)
+        data = serializer.data
+        data.pop('password', None)
+        
+        super().post(request, *args, **kwargs)
+        return response.Response(data, status=status.HTTP_201_CREATED)
 
 
 class UserPasswordChangeView(UpdateAPIView):
