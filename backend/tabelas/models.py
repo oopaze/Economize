@@ -18,4 +18,5 @@ class Parcelamento(models.Model):
     conta_fk = models.ForeignKey('Conta', on_delete=models.CASCADE)
     mes = models.DateField()
     valor = models.DecimalField(max_digits=15, decimal_places=2)
+    pago = models.BooleanField(default=False)
     

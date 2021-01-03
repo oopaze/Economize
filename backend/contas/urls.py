@@ -3,15 +3,17 @@ from .views import (
     ContaCreateView, 
     ContaListView, 
     ContaDeleteView, 
-    ParcelasListView
+    ParcelasListView,
+    ParcelaUpdateView
 )
 
 urlpatterns = [
     ## Contas
     path('', ContaListView.as_view(), name='listar-contas'),
     path('add/', ContaCreateView.as_view(), name='create-conta'),
-    path('delete/<int:pk>', ContaDeleteView.as_view(), name='deletar-conta'),
+    path('delete/<int:pk>/', ContaDeleteView.as_view(), name='deletar-conta'),
 
     ## Contas Por Mês
-    path('mes/', ParcelasListView.as_view(), name='listar-parcelas'),
+    path('parcelas/', ParcelasListView.as_view(), name='listar-parcelas'),
+    path('parcela/<int:pk>/', ParcelaUpdateView.as_view(), name='editar-parcelas'),
 ]

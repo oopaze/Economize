@@ -4,7 +4,6 @@ from dateutil.relativedelta import relativedelta
 from rest_framework.generics import CreateAPIView, ListAPIView, DestroyAPIView, UpdateAPIView
 from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework import response, status
-from django.shortcuts import render
 
 from tabelas.models import Conta, Parcelamento
 from .serializers import ContaSerializer, ParcelasSerializer
@@ -25,6 +24,47 @@ class ContaListView(ListAPIView):
             return qs.filter(id=conta_id) 
 
         return qs
+
+
+class ContaCreateView(CreateAPIView):
+    queryset = Conta.objects.all()
+    serializer_class = ContaSerializer
+    permission_classes = [IsAuthenticated]
+
+    def post(self, *args, **kwargs):
+        post = super().post(*args, **kwargs)
+        
+        if post.status_code == 201:
+            instance = self.queryset.last()
+            hoje = date.today()
+
+            for parcela in range(instance.parcelas):
+                mes = date(hoje.year, hoje.month, 1) + relativedelta(months=+parcela)
+                
+                Parcelamento.objects.create(
+                    conta_fk = instance,
+                    mes = mes,
+                    valor = instance.preco / instance.parcelas,
+                ).save()
+
+        return post
+
+
+class ContaDeleteView(DestroyAPIView):
+    queryset = Conta.objects.all()
+    serializer_class = ContaSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self, *args, **kwargs):
+        qs = super().get_queryset(*args, **kwargs)
+        return qs.filter(usuario_fk__id=self.request.user.id).all()
+
+    def delete(self, request, *args, **kwargs):
+        conta = self.get_queryset().first()
+        serializer = self.serializer_class(conta)
+        
+        super().delete(request, *args, **kwargs)
+        return response.Response(serializer.data, status=status.HTTP_202_ACCEPTED)
 
 
 class ParcelasListView(ListAPIView):
@@ -76,41 +116,28 @@ class ParcelasListView(ListAPIView):
         return dados
 
 
-class ContaCreateView(CreateAPIView):
-    queryset = Conta.objects.all()
-    serializer_class = ContaSerializer
-    permission_classes = [IsAuthenticated]
-
-    def post(self, *args, **kwargs):
-        post = super().post(*args, **kwargs)
-        
-        if post.status_code == 201:
-            instance = self.queryset.last()
-            hoje = date.today()
-
-            for parcela in range(instance.parcelas):
-                mes = date(hoje.year, hoje.month, 1) + relativedelta(months=+parcela)
-                Parcelamento.objects.create(
-                    conta_fk=instance,
-                    mes=mes,
-                    valor=instance.preco / instance.parcelas
-                ).save()
-
-        return post
-
-
-class ContaDeleteView(DestroyAPIView):
-    queryset = Conta.objects.all()
-    serializer_class = ContaSerializer
+class ParcelaUpdateView(UpdateAPIView):
+    queryset = Parcelamento.objects.all()
+    serializer_class = ParcelasSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self, *args, **kwargs):
         qs = super().get_queryset(*args, **kwargs)
-        return qs.filter(usuario_fk__id=self.request.user.id).all()
+        return qs.filter(conta_fk__usuario_fk__id=self.request.user.id).all()
 
-    def delete(self, request, *args, **kwargs):
-        conta = self.get_queryset().first()
-        serializer = self.serializer_class(conta)
+    def get_serializer(self, *args, **kwargs):
         
-        super().delete(request, *args, **kwargs)
-        return response.Response(serializer.data, status=status.HTTP_202_ACCEPTED)
+        if kwargs['data'].get('pago', None) is None:
+            raise KeyError('Somente o atributo "pago" pode ser editado.')
+
+        kwargs['partial'] = True
+
+        return super().get_serializer(*args, **kwargs)
+    
+    def put(self, *args, **kwargs):
+        try:
+            super().put(*args, **kwargs)
+        except KeyError:
+            return response.Response({
+                'error': 'Somente o atributo "pago" pode ser editado.',
+            }, status.HTTP_406_NOT_ACCEPTABLE)
