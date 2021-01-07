@@ -108,7 +108,7 @@ class TestChangePasswordView(APITestCase):
         )
         self.assertIn("error", response.data.keys())
 
-#Ajustar Envio do Token para testes    
+#TODO: Ajustar autenticação do client
 class TestUserListView(APITestCase):
     def setUp(self):
         url = reverse_lazy('user-list')
