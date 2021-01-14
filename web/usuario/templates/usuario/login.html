@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Login {% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="content">
+        <div class="image_section">
+            <div>
+            </div>
+        </div>
+        <div class="form_section">
+            <form action="{% url 'web-login' %}" method="POST" id="form_login">
+                <h3> Sing in </h3>
+                <hr>
+                {% csrf_token %}
+                <div class='fields'>
+                    {{ form.username }}
+                    {{ form.password }}
+                </div>
+                <div class="remember_me" style="display: flex; flex-direction: row;">
+                    {{ form.remember_me }}
+                    <label for="id_remember_me">Mantenha-me conectado</label> 
+                </div>
+                <button type="submit">Entrar</button>
+            </form>
+        </div>
+    </div>
+    <footer>
+        <p>
+            © Copyright Economize all rights reserved.
+        </p> 
+    </footer>
+{% endblock %}

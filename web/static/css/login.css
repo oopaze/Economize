@@ -1,0 +1,94 @@
+html {
+    height: 100%;
+}
+body{
+    background-color: #360e67;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+.content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 20px;
+}
+.form_section{
+    width: 30%;
+    min-width: 290px;
+    height: 80%;
+    min-height: 550px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: #051632;
+    padding: 30px;
+}
+.form_section button, .fields input{
+    margin: 5% 0;
+}
+.form_section h3, .form_section label{
+    color: #ebecec;
+}
+.form_section .remember_me label{
+    margin: 5% 0;
+    font-size: 1rem;
+    font-family: 'Roboto';
+    padding-left: 10px;
+}
+.form_section .fields input{
+    width: 100%;
+    height: 50px;
+}
+.form_section button{
+    height: 50px;
+    width: 100%;
+    background-color: #4fd2a6;
+    border: none;
+    color: black;
+    font-size: 1.2rem;
+}
+.form_section h3{
+    font-family: 'Roboto';
+    font-size: 2rem;
+    margin-bottom: 5%;
+}
+.form_section hr{
+    margin-bottom: 30px;
+    height: 2px;
+    width: 100%;
+    border: none;
+    background-color: #4cd3a4;
+}
+.image_section{
+    width: 30%;    
+    min-width: 290px;
+    height: 80%;
+    min-height: 550px;
+    background-color:#4cd3a4;
+}
+footer{
+    text-align: center;
+    align-self: center;
+    justify-self: flex-end;
+}
+footer p{
+    color: white;
+    align-self: center;
+    font-size: 12px;
+}
+
+@media(max-width: 600px ) {
+    .image_section{
+        display: none;
+    }
+    .form_section{
+        width: 80%;
+    }
+}
