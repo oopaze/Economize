@@ -53,6 +53,7 @@ body{
     border: none;
     color: black;
     font-size: 1.2rem;
+    border-radius: 10px;
 }
 .form_section h3{
     font-family: 'Roboto';
@@ -87,17 +88,19 @@ footer p{
     margin-bottom: 20px;
 }
 
-@media(max-width: 600px) {
+@media(max-width: 650px) {
     .image_section{
-        transform: 0.4s;
+        transform: 2s;
         display: none;
     }
     .form_section{
         justify-self: flex-start;
         flex-basis: 80%;
+        box-shadow: 0 0 1em black;
+        border-radius: 10px;
     }
 }
-@media(max-height: 650px) {
+@media(max-height: 800px) {
     body{
         min-height: 650px;
     }
