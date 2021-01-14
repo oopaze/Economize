@@ -18,7 +18,7 @@ body{
     padding: 20px;
 }
 .form_section{
-    width: 30%;
+    flex-basis: 30%;
     min-width: 290px;
     height: 80%;
     min-height: 550px;
@@ -67,11 +67,13 @@ body{
     background-color: #4cd3a4;
 }
 .image_section{
+    flex-basis: 30%;
     width: 30%;    
     min-width: 290px;
     height: 80%;
     min-height: 550px;
     background-color:#4cd3a4;
+    transform: 0.4s;
 }
 footer{
     text-align: center;
@@ -81,14 +83,31 @@ footer{
 footer p{
     color: white;
     align-self: center;
-    font-size: 12px;
+    font-size: 14px;
+    margin-bottom: 20px;
 }
 
-@media(max-width: 600px ) {
+@media(max-width: 600px) {
     .image_section{
+        transform: 0.4s;
         display: none;
     }
     .form_section{
-        width: 80%;
+        justify-self: flex-start;
+        flex-basis: 80%;
+    }
+}
+@media(max-height: 650px) {
+    body{
+        min-height: 650px;
+    }
+}
+@media(orientation: portrait) and (max-height: 1300px) {
+    .image_section{
+        max-height: 600px;
+    }
+    .form_section{
+        justify-self: flex-start;
+        max-height: 600px;
     }
 }
