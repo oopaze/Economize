@@ -13,6 +13,7 @@
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
         <link rel="stylesheet" href="{% static 'css/menu.css' %}">
         <link rel="stylesheet" href="{% static 'css/modal/modal.css' %}">
+        <link rel="stylesheet" href="{% static 'css/messages.css' %}">
         {% block css %}
         {% endblock %}
     </head>
@@ -56,6 +57,13 @@
             </div>
         </header>
         <section class="container">
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="message {{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
             <div id="container">
                 {% block content %}
                 {% endblock %}

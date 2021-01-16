@@ -50,6 +50,7 @@
     width: 35%;
     border-radius: 5px;
     height: 40px;
+    margin: 0 5px;
 }
 .modal-obj .modal-footer .btn:active {
     transform: translateX(1px);
