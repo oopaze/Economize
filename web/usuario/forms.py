@@ -16,7 +16,8 @@ class AuthUserForm(AuthenticationForm):
         self.fields['password'].widget = forms.TextInput(
             attrs={
                 'placeholder': 'Password',
-                'autofocus':True
+                'autofocus':True,
+                'type': 'password'
             }
         )
         self.fields['username'].widget = forms.TextInput(

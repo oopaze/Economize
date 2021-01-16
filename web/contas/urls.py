@@ -4,10 +4,17 @@ from .api import (
     ContaListView, 
     ContaDeleteView, 
     ParcelasListView,
-    ParcelaUpdateView
+    ParcelaUpdateView,
+    PayParcelaUpdateView
 )
+from .views import PayManyCheckboxView
 
-urlpatterns = [
+
+web_url = [
+    path('pay/many/', PayManyCheckboxView.as_view(), name='pay-many-parcela'),
+]
+
+api_url = [
     ## Contas
     path('api/', ContaListView.as_view(), name='listar-contas'),
     path('api/add/', ContaCreateView.as_view(), name='create-conta'),
@@ -16,4 +23,7 @@ urlpatterns = [
     ## Contas Por Mês
     path('api/parcelas/', ParcelasListView.as_view(), name='listar-parcelas'),
     path('api/parcela/<int:pk>/', ParcelaUpdateView.as_view(), name='editar-parcelas'),
+    path('api/parcela/many/', PayParcelaUpdateView.as_view(), name='pagar-parcelas'),
 ]
+
+urlpatterns = web_url + api_url

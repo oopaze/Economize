@@ -41,6 +41,7 @@ class ContaCreateView(CreateAPIView):
             for parcela in range(instance.parcelas):
                 mes = instance.data_compra + relativedelta(months=+parcela)
                 Parcelamento.objects.create(
+                    parcela = parcela,
                     conta_fk = instance,
                     mes = mes,
                     valor = instance.preco / instance.parcelas,
@@ -140,7 +141,7 @@ class ParcelaUpdateView(UpdateAPIView):
     def get_serializer(self, *args, **kwargs):
         instance = args[0]
         kwargs['partial'] = True
-        kwargs['data'] = {'pago': not instance.pago}
+        kwargs['data'] = {'pago': not instance.pago, 'pago_data': date.today()}
         return super().get_serializer(*args, **kwargs)
 
     def put(self, *args, **kwargs):
@@ -150,3 +151,19 @@ class ParcelaUpdateView(UpdateAPIView):
             return response.Response({
                 'error': 'Somente o atributo "pago" pode ser editado.',
             }, status.HTTP_406_NOT_ACCEPTABLE)
+
+
+class PayParcelaUpdateView(UpdateAPIView):
+    serializer_class = ParcelasSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Parcelamento.objects.filter(
+            conta_fk__usuario_fk = self.request.user
+        )
+    
+    def put(self, *args, **kwargs):
+        print(args)
+        print(kwargs)
+        return super().put(*args, **kwargs)
+        

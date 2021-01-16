@@ -22,9 +22,11 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 from usuario.views import UserLoginView, UserLogoutView
+from contas.views import HomeListView
 
 
 urlpatterns = [
+    path('', HomeListView.as_view(), name='home'),
     path('login/', UserLoginView.as_view(), name='web-login'),
     path('logout/', UserLogoutView.as_view(), name='web-logout'),
     path('api/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),

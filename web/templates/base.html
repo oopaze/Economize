@@ -5,12 +5,97 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Economize - {% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@5.8.55/css/materialdesignicons.min.css"> 
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;500;600;700;800&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="//cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css">
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        <link rel="stylesheet" href="{% static 'css/menu.css' %}">
+        <link rel="stylesheet" href="{% static 'css/modal/modal.css' %}">
         {% block css %}
         {% endblock %}
     </head>
     <body>
-        {% block content %}
+        <header id="sidebar">
+            <div class="header">
+                <div class="img">
+                    <a 
+                      id="toggle-sidebar" 
+                      style="background-image: url('{% static "img/logo.png" %}');">
+                    </a>
+                </div>
+                <nav>
+                    <ul class="options">
+                        <li>
+                            <a href="{% url 'home' %}"><i class="mdi mdi-home"></i> <span class="text">Home</span> </a>
+                        </li>
+                        <li>
+                            <a href=""><i class="mdi mdi-chart-pie"></i></i> <span class="text">Dashboard</span> </a>
+                        </li>
+                        <li>
+                            <a href=""><i class="mdi mdi-clipboard-text"></i> <span class="text">Dividas</span> </a>
+                        </li>
+                        <li>
+                            <a href=""><i class="mdi mdi-account"></i> <span class="text">Perfil</span> </a>
+                        </li>
+                        <li>
+                            <a href="">
+                                <i class="mdi mdi-cog-outline"></i>
+                                <span class="text">Configuracoes</span> 
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#logout-modal" rel="modal:open">
+                                <i class="mdi mdi-logout"></i>
+                                <span class="text">Logout</span> 
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <section class="container">
+            <div id="container">
+                {% block content %}
+                {% endblock %}
+            </div>
+            <footer>
+                <p>
+                    Copyright © 2021 Economize. All rights reserved.
+                </p> 
+                {% include 'modal/logout_modal.html' %}
+            </footer>
+        </section>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+        <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> -->
+        <script>
+            $(document).ready(function() {
+                $("#toggle-sidebar").click(function(){
+                    $('#sidebar').toggle("fast", function() {
+                        $(this).hide(() => {
+                            $('.container').addClass('no-margin');
+                            $('.sidebar-control').css('display', 'initial')
+                            $('.sidebar-control').css('pointer-events', 'all')
+                        });
+                    })
+                })
+                $(".sidebar-control").click(function(){
+                    $('#sidebar').toggle("fast", function() {
+                        $(this).show(() => {
+                            $('.container').removeClass('no-margin');
+                            $('.sidebar-control').css('display', 'none')
+                        });
+                    })
+                })
+                $("#logout-modal").click(()=> {
+                    $("#logout-modal").dialog({ show: 'fade', hide: 'drop' });
+                })
+            })
+        </script>
+        {% block js %}
         {% endblock %}
     </body>
 </html>
