@@ -9,32 +9,57 @@
 {% endblock %}
 
 {% block content %}
-    <div class="navigation">
+    <div class="navigation">        
             <div class="menu">
             <ul>
                 <li class="sidebar-control"><a><i class="mdi mdi-menu"></i></a></li>
                 <li><a onclick="select_nav('todas-a')" id="todos-a" class="selected-nav" href="{% url 'home' %}">Todas</a></li>
+                <li><a onclick="select_nav('a_pagar-a')" id="a_pagar-a" href="{% url 'home' %}?npago=0">Este mes</a></li>
                 <li><a onclick="select_nav('pago-a')" id="pago-a" href="{% url 'home' %}?pago=1">Pago</a></li>
-                <li><a onclick="select_nav('a_pagar-a')" id="a_pagar-a" href="{% url 'home' %}?npago=0">A pagar</a></li>
-                <li><a onclick="select_nav('em_atraso-a')" id="em_atraso-a" href="{% url 'home' %}?em_atraso=1">Em atraso</a></li>
+                <li><a onclick="select_nav('em_atraso-a')" id="em_atraso-a" href="{% url 'home' %}?em_atraso=1">Atrasado</a></li>
             </ul>
         </div>
         <hr>
     </div>
     <div class="table">
         <div class="filter">
-            <button class="btn">
+            <a class="btn" id="filter-bt">
                 <i class="mdi mdi-filter-outline"></i> 
                 <span>Filtrar</span> 
-            </button>
+            </a>
             <div class="search">
                 <a href="">
-                    <i class="mdi mdi-magnify"></i>
+                    <i class="mdi mdi-magnify" style="font-size: 28px;"></i>
                 </a>
                 <input type="text" placeholder="Procure por valor, loja ou produto">
             </div>
         </div>
-        <table>
+        <form class="form-filtro" action="{% url 'home' %}" method="POST">
+            {% csrf_token %}
+            <div class="form-content">
+                <div class="data-inicial">
+                    <label for="id_mes_initial">Data Inicial: </label><br>
+                    {{ filtro_form.mes_initial }}
+                </div>
+                <div class="data-final">
+                    <label for="id_mes_initial">Data Final: </label><br>
+                    {{ filtro_form.mes_final }}
+                </div>
+                <div class="preco-minimo">
+                    <label for="id_max_value"> Preço Mínimo: </label><br>
+                    {{ filtro_form.min_value }}
+                </div>
+                <div class="preco-maximo">
+                    <label for="id_max_value"> Preço Máximo: </label><br>
+                    {{ filtro_form.max_value }}
+                </div>
+            </div>
+            <div class="submit">
+                <button id="btn-cancel" type="button" class="btn btn-info">Voltar</button>
+                <button type="submit" class="btn btn-success">Filtrar</button>
+            </div>
+        </form>
+        <table id="table">
             <colgroup>
                 <col span="1" style="width: 5%;">
                 <col span="1" style="width: 20%;">
@@ -111,15 +136,15 @@
             <div class="skip">
                 {% if page_obj.has_previous %}
                     {% if page_obj.previous_page_number == 1 %}
-                    <a href="?page=1">
+                    <a class="btn" href="?page=1">
                     {% else %}
-                    <a href="?page={{ page_obj.previous_page_number }}">
+                    <a class="btn" href="?page={{ page_obj.previous_page_number }}">
                     {% endif %}
                         <i class="mdi mdi-chevron-left"></i>
                     </a>
                 {% endif %}
                 {% if page_obj.has_next %}
-                    <a href="?page={{ page_obj.next_page_number }}">
+                    <a class="btn" href="?page={{ page_obj.next_page_number }}">
                         <i class="mdi mdi-chevron-right"></i>
                     </a>
                 {% endif %}
@@ -180,6 +205,13 @@
                     $(this).prop('checked', true);
                 });
             });
+            $('.form-filtro').hide()
+            $('#filter-bt').click(() => {
+                $('.form-filtro').fadeToggle('slow', 'linear')
+            })
+            $('#btn-cancel').click(() => {
+                $('.form-filtro').fadeToggle('fast', 'linear')
+            })
         });
 
         select_nav()

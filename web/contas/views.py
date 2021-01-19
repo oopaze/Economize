@@ -19,9 +19,9 @@ class HomeListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self, *args, **kwargs):
         agora = date.today().replace(day=1)
-        proximo_mes = agora.replace(month=agora.month+1)# + relativedelta(month=+1)
+        proximo_mes = agora.replace(month=agora.month+1)
         qs = super().get_queryset(*args, **kwargs).filter(
-            conta_fk__usuario_fk = self.request.user
+            conta_fk__usuario_fk = self.request.user,
         )
 
         mes = self.request.GET.get('mes', None)
@@ -31,18 +31,13 @@ class HomeListView(LoginRequiredMixin, ListView):
         em_atraso = self.request.GET.get('em_atraso', None)
 
         if mes is not None:
-            mes = datetime.strptime(mes, "%d/%m/%Y").date().replace(day=1)
-            mes_proximo = mes.replace(month=mes.month + 1)
-            qs = qs.filter(mes__gt=mes, mes__lt=mes_proximo)
+            qs = qs.filter(mes__gt=agora, mes__lt=proximo_mes)
         
         if em_atraso is not None:
-            qs = super().get_queryset(*args, **kwargs).filter(
-                conta_fk__usuario_fk = self.request.user, 
-                mes__lt=agora, pago=False
-            )
+            qs = qs.filter(conta_fk__usuario_fk = self.request.user, mes__lt=agora, pago=False)
 
         if npago:
-            qs = qs.filter(pago=False, mes__gt=agora, mes__lt=proximo_mes)
+            qs = qs.filter(mes__gt=agora, mes__lt=proximo_mes)
         
         elif pago:
             qs = qs.filter(pago=pago, mes__gt=agora, mes__lt=proximo_mes)
@@ -61,7 +56,7 @@ class HomeListView(LoginRequiredMixin, ListView):
         ).aggregate(Sum('valor'))
 
         context['total'] = total['valor__sum'] if total['valor__sum'] else 0 
-        context['filtro'] = FilterParcelasForm()
+        context['filtro_form'] = FilterParcelasForm()
 
         return context
 

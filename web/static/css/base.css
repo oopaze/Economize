@@ -74,6 +74,9 @@ footer p{
     font-size: 12px;
     margin-bottom: 20px;
 }
+.btn:active {
+    transform: translateX(1px);
+}
 @media(max-width: 450px) {
     header{
         display: none;

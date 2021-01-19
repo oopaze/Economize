@@ -1,13 +1,15 @@
 <div id="filter-modal" class="modal modal-filter">
-    <div class="modal-content">
-        <i class="mdi mdi-information-outline"></i>
-        <p>
-            Tem certeza que deseja sair?
-        </p>
-    </div>
-    <hr>
-    <div class="modal-filter-footer">
-        <a class="btn btn-success" href="{% url 'web-logout' %}">Sair</a>
-        <a class="btn btn-info" rel="modal:close">Cancel</a>
-    </div>
+    <form action="{% url 'home' %}" method="POST">
+        {% csrf_token %}
+        <div class="modal-header">
+            Filtrar Parcelas
+        </div>
+        <div class="modal-content">
+            {{ filtro_form }}
+        </div>
+        <div class="modal-footerf">
+            <button type="button" class="btn btn-success">Filtrar</button>
+            <a class="btn btn-info" rel="modal:close">Voltar</a>
+        </div>
+    </form>
 </div>

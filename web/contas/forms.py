@@ -20,7 +20,49 @@ class PayManyParcelaForm(forms.Form):
             parcela.save()
 
 
-class FilterParcelasForm(forms.ModelForm):
-    class Meta:
-        model = Parcelamento
-        fields = '__all__'
+class FilterParcelasForm(forms.Form):
+    mes_initial = forms.DateField(
+        initial=date.today(),
+        label="Data inicial",
+        widget=forms.TextInput(
+            attrs = {
+                'class': 'date-picker',
+                'placeholder': 'Data Inicial'
+            }
+        )
+    )
+    mes_final = forms.DateField(
+        label = 'Data Final',
+        widget=forms.TextInput(
+            attrs = {
+                'class': 'date-picker',
+                'placeholder': 'Data Final'
+            }
+        )
+    )
+    min_value = forms.DecimalField(
+        label='Preço Mínimo da parcela',
+        decimal_places=2,
+        min_value=0,
+        widget=forms.NumberInput(
+            attrs={
+                'placeholder': 'Preço Mínimo da parcela'
+            }
+        )
+    )
+    max_value = forms.DecimalField(
+        label='Preço Máximo da parcela',
+        decimal_places=2,
+        min_value=0,
+        widget=forms.NumberInput(
+            attrs={
+                'placeholder': 'Preço Máximo da parcela'
+            }
+        )
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        for key in self.fields.keys():
+            self.fields[key].required = False

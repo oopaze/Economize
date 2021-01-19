@@ -10,6 +10,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;500;600;700;800&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="//cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css">
+        <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
         <link rel="stylesheet" href="{% static 'css/menu.css' %}">
         <link rel="stylesheet" href="{% static 'css/modal/modal.css' %}">
@@ -73,11 +74,14 @@
                     Copyright © 2021 Economize. All rights reserved.
                 </p> 
                 {% include 'modal/logout_modal.html' %}
+                {% include 'modal/filter_modal.html' %}
             </footer>
         </section>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> -->
         <script>
             $(document).ready(function() {
@@ -98,9 +102,26 @@
                         });
                     })
                 })
-                $("#logout-modal").click(()=> {
-                    $("#logout-modal").dialog({ show: 'fade', hide: 'drop' });
-                })
+                $(function() {
+                    $('.date-picker').datepicker({
+                        changeMonth: true,
+                        changeYear: true,
+                        dateFormat: "M yy",
+                        showButtonPanel: true,
+                        currentText: "This Month",
+                        monthNamesShort: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+                        onChangeMonthYear: function (year, month, inst) {
+                            $(this).val($.datepicker.formatDate('mm/yy', new Date(year, month - 1, 1)));
+                        },
+                        onClose: function(dateText, inst) {
+                            var month = $(".ui-datepicker-month :selected").val();
+                            var year = $(".ui-datepicker-year :selected").val();
+                            $(this).val($.datepicker.formatDate('mm/yy', new Date(year, month, 1)));
+                        }
+                    }).focus(function () {
+                        $(".ui-datepicker-calendar").hide();
+                    });
+                });
             })
         </script>
         {% block js %}
