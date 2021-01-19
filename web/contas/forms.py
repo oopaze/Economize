@@ -21,6 +21,17 @@ class PayManyParcelaForm(forms.Form):
 
 
 class FilterParcelasForm(forms.Form):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        for key in self.fields.keys():
+            self.fields[key].required = False
+    
+    def filter(self, qs, params):
+        ...
+
+
     mes_initial = forms.DateField(
         initial=date.today(),
         label="Data inicial",
@@ -60,9 +71,10 @@ class FilterParcelasForm(forms.Form):
             }
         )
     )
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        
-        for key in self.fields.keys():
-            self.fields[key].required = False
+    search_input = forms.CharField(
+        widget=forms.TextInput(
+            attrs={
+                'placeholder':'Procure por valor, loja ou produto'
+            }
+        )
+    )

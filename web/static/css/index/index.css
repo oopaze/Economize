@@ -25,12 +25,15 @@ body{
     width: 30%;
     max-width: 350px;
 }
-.table .filter .search a {
+.table .filter .search button {
     height: 100%;
     width: 15%;
     text-align: center;
+    border: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
-.table .filter .search a:hover i{
+.table .filter .search button:hover i{
     color: black;
 }
 .table .filter .search i {
