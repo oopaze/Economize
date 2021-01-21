@@ -6,6 +6,7 @@
 {% block css %}
     <link rel="stylesheet" href="{% static 'css/index/index.css' %}">
     <link rel="stylesheet" href="{% static 'css/index/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index/filtro.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -36,31 +37,6 @@
                 <!-- <input type="text" placeholder="Procure por valor, loja ou produto"> -->
             </form>
         </div>
-        <form class="form-filtro" action="{% url 'home' %}" method="POST">
-            {% csrf_token %}
-            <div class="form-content">
-                <div class="data-inicial">
-                    <label for="id_mes_initial">Data Inicial: </label><br>
-                    {{ filtro_form.mes_initial }}
-                </div>
-                <div class="data-final">
-                    <label for="id_mes_initial">Data Final: </label><br>
-                    {{ filtro_form.mes_final }}
-                </div>
-                <div class="preco-minimo">
-                    <label for="id_max_value"> Preço Mínimo: </label><br>
-                    {{ filtro_form.min_value }}
-                </div>
-                <div class="preco-maximo">
-                    <label for="id_max_value"> Preço Máximo: </label><br>
-                    {{ filtro_form.max_value }}
-                </div>
-            </div>
-            <div class="submit">
-                <button id="btn-cancel" type="button" class="btn btn-info">Voltar</button>
-                <button type="submit" class="btn btn-success">Filtrar</button>
-            </div>
-        </form>
         <table id="table">
             <colgroup>
                 <col span="1" style="width: 5%;">
@@ -200,16 +176,22 @@
                 input_ids.value = list_ids.join(',');
             }
         }
-
+        var slided = true
         $(document).ready(function(){
             $('.force-checked').each(function(index, value){
                 $(value).change(function(){
                     $(this).prop('checked', true);
                 });
             });
-            $('.form-filtro').hide()
             $('#filter-bt').click(() => {
-                $('.form-filtro').fadeToggle('slow', 'linear')
+                if (slided){
+                    $('.form-filtro').slideDown('slow', 'linear');
+                    slided = false
+                } else {
+                    $('.form-filtro').slideUp('slow', 'linear');
+                    slided = true
+
+                }
             })
             $('#btn-cancel').click(() => {
                 $('.form-filtro').fadeToggle('fast', 'linear')

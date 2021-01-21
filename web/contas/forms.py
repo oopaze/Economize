@@ -33,7 +33,6 @@ class FilterParcelasForm(forms.Form):
 
 
     mes_initial = forms.DateField(
-        initial=date.today(),
         label="Data inicial",
         widget=forms.TextInput(
             attrs = {
