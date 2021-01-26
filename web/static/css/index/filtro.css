@@ -1,10 +1,11 @@
+
 #filter-content {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    min-width: 300px;
+    width: 100%;
 }
 #filter-content .filter-input{
     font-size: 12px;
@@ -16,9 +17,26 @@
 #filter-content .filter-input input{
     min-height: 40px;
     min-width: 150px;
+    width: 100%;
 }
 #filter-content button{
-    width: 80px;
     min-width: 60px;
+    max-width: 60px;
     justify-self: flex-end;
+}
+#webuiPopover0 {
+    width: 60%;
+    max-width: 900px;
+}
+@media(max-width: 800px){
+    #webuiPopover0 {
+        width: 60% !important;
+    }
+    #filter-content .filter-input{
+        width: 100%;
+    }
+    #filter-content .btn {
+        min-width: 150px;
+        align-self: flex-start;
+    }
 }
