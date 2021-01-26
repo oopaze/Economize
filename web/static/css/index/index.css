@@ -32,9 +32,13 @@ body{
     border: none;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    background-color: rgb(252, 247, 247);
+}
+.table .filter .search button:hover {
+    background-color: rgba(227, 233, 233, 0.5);
 }
 .table .filter .search button:hover i{
-    color: black;
+    color: #163360;
 }
 .table .filter .search i {
     font-size: 1.6rem;
@@ -48,7 +52,7 @@ body{
     border: none;
     width: 75%;
     min-width: 160px;
-    max-height: 20px;
+    max-height: 30px;
 }
 .table .filter {
     margin-top: 2%;

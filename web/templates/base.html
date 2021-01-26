@@ -82,11 +82,11 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
         <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-        <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script> -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <script>
             $(document).ready(function() {
                 $("#toggle-sidebar").click(function(){
-                    $('#sidebar').toggle("fast", function() {
+                    $('#sidebar').toggle("slide", function() {
                         $(this).hide(() => {
                             $('.container').addClass('no-margin');
                             $('.sidebar-control').css('display', 'initial')
@@ -95,7 +95,7 @@
                     })
                 })
                 $(".sidebar-control").click(function(){
-                    $('#sidebar').toggle("fast", function() {
+                    $('#sidebar').toggle("slide", function() {
                         $(this).show(() => {
                             $('.container').removeClass('no-margin');
                             $('.sidebar-control').css('display', 'none')
@@ -111,12 +111,7 @@
                         currentText: "This Month",
                         monthNamesShort: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
                         onChangeMonthYear: function (year, month, inst) {
-                            $(this).val($.datepicker.formatDate('mm/yy', new Date(year, month - 1, 1)));
-                        },
-                        onClose: function(dateText, inst) {
-                            var month = $(".ui-datepicker-month :selected").val();
-                            var year = $(".ui-datepicker-year :selected").val();
-                            $(this).val($.datepicker.formatDate('mm/yy', new Date(year, month, 1)));
+                            $(this).val($.datepicker.formatDate('01/mm/yy', new Date(year, month - 1, 1)));
                         }
                     }).focus(function () {
                         $(".ui-datepicker-calendar").hide();

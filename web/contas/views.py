@@ -1,7 +1,7 @@
 from datetime import date, datetime
 from dateutil.relativedelta import relativedelta
 
-from django.views.generic import ListView, View
+from django.views.generic import ListView, FormView, View, UpdateView   
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Sum
 from django.shortcuts import redirect
@@ -11,11 +11,25 @@ from tabelas.models import Parcelamento
 from .forms import PayManyParcelaForm, FilterParcelasForm
 
 
-class HomeListView(LoginRequiredMixin, ListView):
+class HomeListView(LoginRequiredMixin, ListView, FormView):
     template_name = 'index.html'
     model = Parcelamento
+    form_class = FilterParcelasForm
     context_object_name = 'contas'
     paginate_by = 10
+    success_url = reverse_lazy('home')
+
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.is_form_valid = False
+    
+
+    def post(self, *args, **kwargs):
+        self.is_form_valid = True
+        self.form = form = self.get_form()
+        return super().get(*args, **kwargs)
+
 
     def get_queryset(self, *args, **kwargs):
         agora = date.today().replace(day=1)
@@ -44,8 +58,12 @@ class HomeListView(LoginRequiredMixin, ListView):
         
         if responsavel is not None:
             qs = qs.filter(conta_fk__responsavel__icontains=responsavel)
+
+        if self.is_form_valid:
+            qs = self.form.filter(qs)
         
         return qs.order_by('mes')
+
     
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
@@ -56,7 +74,6 @@ class HomeListView(LoginRequiredMixin, ListView):
         ).aggregate(Sum('valor'))
 
         context['total'] = total['valor__sum'] if total['valor__sum'] else 0 
-        context['filtro_form'] = FilterParcelasForm()
 
         return context
 
