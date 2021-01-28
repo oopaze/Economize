@@ -52,8 +52,8 @@
     font-size: 1.5rem;
 }
 .navigation .menu ul li a:hover {
-    color: #4fd2a6;
-    border-color: #4fd2a6;
+    color: #24D1C7;
+    border-color: #24D1C7;
 }
 @media(max-width: 450px) {
     .navigation .menu ul .sidebar-control {

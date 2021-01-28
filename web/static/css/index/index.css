@@ -94,7 +94,7 @@ body{
     padding: 0 3%;
 }
 .table table .title th{
-    background-color: #4fd2a6;
+    background-color: #24D1C7;
     color: #6E6893;
     font-family: 'Manrope', sans-serif;
     font-size: 0.8rem;
@@ -143,7 +143,7 @@ body{
     padding-right: 3%;
     width: 100%;
     height: 40px;
-    background-color: #4fd2a6;
+    background-color: #24D1C7;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
 }
@@ -193,11 +193,11 @@ body{
     text-align: right;
 }
 .table .total .money{
-    color: #4fd2a6;
+    color: #24D1C7;
 }
 .selected-nav{
-    color: #4fd2a6 !important;
-    border-color: #4fd2a6 !important;
+    color: #24D1C7 !important;
+    border-color: #24D1C7 !important;
 }
 @media(max-width: 600px){
     * {
@@ -221,8 +221,8 @@ body{
         margin-right: 10px;
     }
     .navigation .menu ul li a:hover {
-        color: #4fd2a6;
-        border-color: #4fd2a6;
+        color: #24D1C7;
+        border-color: #24D1C7;
     }
     .navigation .menu{
         justify-content: center;

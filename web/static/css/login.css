@@ -61,11 +61,18 @@ body{
 .form_section button{
     height: 50px;
     width: 100%;
-    background-color: #4fd2a6;
+    background-color: #24D1C7;
     border: none;
     color: black;
     font-size: 1.2rem;
     border-radius: 10px;
+    cursor: pointer;
+}
+.form_section button:hover{
+    opacity: 0.9;
+}
+.form_section button:active{
+    transform: translateX(1px);
 }
 .form_section h3{
     font-family: 'Roboto';
@@ -77,7 +84,7 @@ body{
     height: 2px;
     width: 100%;
     border: none;
-    background-color: #4cd3a4;
+    background-color: #24D1C7;
 }
 .image_section{
     flex-basis: 30%;
@@ -85,7 +92,7 @@ body{
     min-width: 290px;
     height: 80%;
     min-height: 550px;
-    background-color:#4cd3a4;
+    background-color:#24D1C7;
     transform: 0.4s;
 }
 @media(max-width: 650px) {

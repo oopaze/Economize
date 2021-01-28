@@ -40,7 +40,6 @@
                     <i class="mdi mdi-magnify" style="font-size: 28px;"></i>
                 </button>
                 {{ form.search_input }}
-                <!-- <input type="text" placeholder="Procure por valor, loja ou produto"> -->
             </form>
         </div>
         <table id="table">
@@ -152,6 +151,9 @@
         <div class="filter-input">
             {{ form.mes_final }}
         </div>
+        <div class="search-hidden" style="display: none;">
+            {{ form.search_input }}
+        </div>
         <button type="submit" class="btn btn-success">Filtrar</button>
     </form>
 {% endblock %}
@@ -218,5 +220,9 @@
             url: '#filter-content',
             dismissible: false
         });
+        $('.search > #id_search_input').on('input', function() {
+            var text = $(this).val()
+            $('.search-hidden > #id_search_input').val(text) 
+        })
     </script>
 {% endblock %}
