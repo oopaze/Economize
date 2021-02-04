@@ -20,10 +20,10 @@
             <div class="menu">
             <ul>
                 <li class="sidebar-control"><a><i class="mdi mdi-menu"></i></a></li>
-                <li><a onclick="select_nav('todas-a')" id="todos-a" class="selected-nav" href="{% url 'home' %}">Todas</a></li>
-                <li><a onclick="select_nav('a_pagar-a')" id="a_pagar-a" href="{% url 'home' %}?npago=0">Este mes</a></li>
-                <li><a onclick="select_nav('pago-a')" id="pago-a" href="{% url 'home' %}?pago=1">Pago</a></li>
-                <li><a onclick="select_nav('em_atraso-a')" id="em_atraso-a" href="{% url 'home' %}?em_atraso=1">Atrasado</a></li>
+                <li><a class="{{ select_este_mes }}" href="{% url 'dividas-este-mes' %}">Este mes</a></li>
+                <li><a class="{{ select_home }}"  href="{% url 'home' %}">Todas</a></li>
+                <li><a class="{{ select_pagas }}"  href="{% url 'dividas-pagas' %}">Pago</a></li>
+                <li><a class="{{ select_atraso }}"  href="{% url 'dividas-em-atraso' %}">Pagar</a></li>
             </ul>
         </div>
         <hr>
@@ -34,7 +34,7 @@
                 <i class="mdi mdi-filter-outline"></i> 
                 <span>Filtrar</span> 
             </a>
-            <form class="search" action="{% url 'home' %}" method="POST">
+            <form class="search" action="{{ action }}" method="POST">
                 {% csrf_token %}
                 <button type="submit">
                     <i class="mdi mdi-magnify" style="font-size: 28px;"></i>
@@ -80,7 +80,7 @@
                         <td>
                             {% if conta.pago %}
                                 <strong class="pg"> OK </strong> 
-                                <p class="subtitle">Pago em {{ conta.data_pago }}</p>  
+                                <p class="subtitle">Pago em {{ conta.data_pago|date:"d/m/Y" }}</p>  
                             {% else %}
                                 <strong class="err"> Erro </strong> 
                                 <p class="subtitle">Ainda não foi pago</p>
@@ -134,7 +134,8 @@
             </div>
         </div>
         <div class="total">
-            <p>Total a pagar: <span class="money">R${{ total }}</span></p>
+            <p>A pagar: <span class="money">R${{ total }}</span></p>
+            <p>Gasto: <span class="money">R${{ total_gasto }}</span></p>
         </div>
     </div>
     <form id="filter-content" style="display:none;" action="{% url 'home' %}" method="POST">
@@ -160,32 +161,6 @@
 {% block js %}
     <script src="https://cdn.jsdelivr.net/jquery.webui-popover/1.2.1/jquery.webui-popover.min.js"></script>
     <script>
-        var ids = ['todos-a', 'pago-a', 'a_pagar-a', 'em_atraso-a']
-        var nav_item = {
-            '': 'todos-a',            
-            'pago=1': 'pago-a', 
-            'npago=0': 'a_pagar-a',   
-            'em_atraso=1': 'em_atraso-a'
-        }
-        var url_param = String(window.location.href);
-        url_param = url_param.replace('?', '');
-        for(var i=1; i<50; i++){
-            url_param = url_param.replace('page='+i, '');
-        }
-        url_param = url_param.split('/');
-        const select_nav = () => {
-            for (id in ids){
-                id = ids[id];
-                if (id === nav_item[url_param[3]]){
-                    var element = document.getElementById(id);
-                    element.className = 'selected-nav';
-                } else {
-                    var element = document.getElementById(id);
-                    element.className = '';
-                }
-            }
-        }
-
         var list_ids = []
         var input_ids = document.getElementsByName('ids')[0];
         const separe_data = (value, id) => {

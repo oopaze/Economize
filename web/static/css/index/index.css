@@ -188,9 +188,15 @@ body{
 }
 .table .total{
     margin-top: 10px;
-    font-size: 1.6rem;
+    font-size: 1.3rem;
     color: white;
     text-align: right;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+.table .total p{
+    margin: 0 10px;
 }
 .table .total .money{
     color: #24D1C7;

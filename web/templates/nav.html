@@ -1,0 +1,39 @@
+{% load static %}
+<header id="sidebar">
+    <div class="header">
+        <div class="img">
+            <a 
+              id="toggle-sidebar" 
+              style="background-image: url('{% static "img/logo.png" %}');">
+            </a>
+        </div>
+        <nav>
+            <ul class="options">
+                <li>
+                    <a href="{% url 'home' %}"><i class="mdi mdi-home"></i> <span class="text">Home</span> </a>
+                </li>
+                <li>
+                    <a href=""><i class="mdi mdi-chart-pie"></i></i> <span class="text">Dashboard</span> </a>
+                </li>
+                <li>
+                    <a href=""><i class="mdi mdi-clipboard-text"></i> <span class="text">Dividas</span> </a>
+                </li>
+                <li>
+                    <a href=""><i class="mdi mdi-account"></i> <span class="text">Perfil</span> </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="mdi mdi-cog-outline"></i>
+                        <span class="text">Configuracoes</span> 
+                    </a>
+                </li>
+                <li>
+                    <a href="#logout-modal" rel="modal:open">
+                        <i class="mdi mdi-logout"></i>
+                        <span class="text">Logout</span> 
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</header>

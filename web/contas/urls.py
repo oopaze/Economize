@@ -7,12 +7,7 @@ from .api import (
     ParcelaUpdateView,
     PayParcelaUpdateView
 )
-from .views import PayManyCheckboxView
-
-
-web_url = [
-    path('pay/many/', PayManyCheckboxView.as_view(), name='pay-many-parcela'),
-]
+web_url = []
 
 api_url = [
     ## Contas

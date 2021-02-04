@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'contas',
+    'dividas',
     'tabelas',
     'usuario',
     'utils',

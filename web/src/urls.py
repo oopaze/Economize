@@ -22,7 +22,7 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 from usuario.views import UserLoginView, UserLogoutView
-from contas.views import HomeListView
+from dividas.views import HomeListView
 
 
 urlpatterns = [
@@ -32,6 +32,7 @@ urlpatterns = [
     path('api/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('contas/', include('contas.urls')),
+    path('dividas/', include('dividas.urls')),
     path('user/', include('usuario.urls')),
     path('admin/', admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
