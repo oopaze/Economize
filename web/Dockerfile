@@ -11,4 +11,5 @@ WORKDIR /projects/Economize/web
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
+#COPIANDO PROJETO
 COPY . .
