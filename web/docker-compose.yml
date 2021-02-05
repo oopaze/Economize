@@ -1,4 +1,4 @@
-version: 3.8
+version: '3.8'
 
 services:
   web:
@@ -16,7 +16,7 @@ services:
       - POSTGRES_USER=oopaze
       - POSTGRES_PASSWORD=mae12345
     volumes: 
-      - postgres_data: /var/lib/postgresql/data/
+      - postgres_data:/var/lib/postgresql/data/
   
 volumes:
   postgres_data:
