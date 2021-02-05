@@ -1,0 +1,129 @@
+.modal-obj {
+    width: 300px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #07172F !important;
+}
+.modal-obj .modal-content{
+    width: 100%;
+    height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+.modal-obj .modal-content p{
+    color: honeydew;
+    font-size: 1.5rem;
+}
+.modal-obj .modal-content i{
+    font-size: 6rem;
+    color: red;
+    margin-bottom: 5%;
+}
+.modal hr {
+    border: none;
+    height: 1px;
+    background-color: rgb(47, 50, 82);
+}
+.modal-obj .modal-footer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 60px;
+
+}
+.btn {
+    font-size: 14px;
+    display: block;
+    line-height: 40px;
+    font-weight: 600;
+    justify-self: center;
+    text-align: center;
+    min-width: 80px;
+    width: 20%;
+    border-radius: 5px;
+    height: 40px;
+    margin: 0 5px;
+    border: none;
+}
+.btn:active {
+    transform: translateX(1px);
+}
+.btn:hover{
+    opacity: 0.8;
+}
+.btn-cancel{
+    color: white;
+    background-color: #e65457;
+}
+.btn-info{
+    color: #212529;
+    background-color: #ebf1f7;
+}
+.btn-info:hover{
+    background-color: #d9e2eb;
+}
+.btn-success{
+    color:white;
+    background-color: #31c453;
+}
+.btn-success:hover{
+    background-color: #0c8628;
+}
+
+
+.modal-filter {
+    background-color: #07172F !important;
+    min-height: 450px;
+}
+.modal-filter form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+.modal-filter form .modal-header{
+    font-size: 1.5rem;
+    color: white;
+    padding: 20px;
+}
+.modal-filter form .modal-content{
+    width: 100%;
+    min-width: 250px;
+    flex-basis: 85%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    padding: 20px;
+    color: rgb(215, 216, 230);
+}
+.modal-filter form .modal-content label{
+    font-size: 0.8rem;
+}
+.modal-filter form .modal-content input{
+    margin-top: 4px;
+    margin-bottom: 15px;
+    padding: 0 5px;
+    border: 0;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 0.7rem;
+}
+.modal-filter form .modal-footerf{
+    justify-self: flex-end;
+    align-self: center;
+    flex-basis: 15%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

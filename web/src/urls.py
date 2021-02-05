@@ -21,6 +21,7 @@ from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+
 from usuario.views import UserLoginView, UserLogoutView
 from dividas.views import HomeListView
 
