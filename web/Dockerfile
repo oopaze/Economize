@@ -1,10 +1,4 @@
-FROM ubuntu:16.04
-
-#MAIN APPS
-RUN apt-get update
-RUN apt-get -y install python-pip
-RUN apt-get update
-RUN pip install --upgrade pip
+FROM python:3.8
 
 #SET ENVIROMENT VARIABLES
 ENV PYTHONDONTWRITEBYTECODE 1
