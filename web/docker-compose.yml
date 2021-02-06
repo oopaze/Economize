@@ -19,3 +19,8 @@ services:
       - POSTGRES_DB=economize
       - POSTGRES_USER=oopaze
       - POSTGRES_PASSWORD=mae12345
+    volumes: 
+      - postgres_data:/var/lib/postgresql/data/
+  
+volumes:
+  postgres_data:
