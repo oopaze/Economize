@@ -1,0 +1,42 @@
+
+#filter-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+}
+#filter-content .filter-input{
+    font-size: 12px;
+    margin-top: 10px;
+    margin: 10px 5px;
+    flex-grow: 1;
+    min-width: 150px;
+}
+#filter-content .filter-input input{
+    min-height: 40px;
+    min-width: 150px;
+    width: 100%;
+}
+#filter-content button{
+    min-width: 60px;
+    max-width: 60px;
+    justify-self: flex-end;
+}
+#webuiPopover0 {
+    width: 60%;
+    max-width: 900px;
+}
+@media(max-width: 800px){
+    #webuiPopover0 {
+        width: 60% !important;
+    }
+    #filter-content .filter-input{
+        width: 100%;
+    }
+    #filter-content .btn {
+        min-width: 150px;
+        align-self: flex-start;
+    }
+}
