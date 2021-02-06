@@ -11,7 +11,7 @@ class ContaListView(LoginRequiredMixin, ListView):
     model = Conta
     context_object_name = 'items'
     paginate_by = 15
-    allow_empty=True
+    ordering = 'id'
 
     def get_queryset(self):
         qs = super().get_queryset()
