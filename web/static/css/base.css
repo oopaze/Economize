@@ -93,6 +93,9 @@ footer p{
     .navigation ul li{
         text-align: center;
     }
+    .navigation ul li:first-child{
+        text-align: center;
+    }
     .table .total {
         font-size: 6rem;
     }

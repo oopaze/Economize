@@ -38,7 +38,7 @@ nav li a {
     display: block;
     line-height: 55px;
     font-size: 0.8rem;
-    color: #414141;
+    color: #2E1A68;
     width: 100%;
     height: 100%;
     box-sizing: border-box;
@@ -48,8 +48,8 @@ nav li a {
     padding-left: 25px;
 }
 nav li a:hover{
-    color: black;
-    font-size: 1.0rem;
+    opacity: 0.8;
+    font-size: 0.8rem;
 }
 nav li a:hover i{
     font-size: 1.8rem;

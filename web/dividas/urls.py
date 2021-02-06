@@ -7,6 +7,11 @@ from .views import (
     HomeListView,
     EsteMesDividasListView
 )
+from .api import (
+    ParcelasListView,
+    ParcelaUpdateView,
+    PayParcelaUpdateView
+)
 
 web_url = [
     #Dividas
@@ -17,6 +22,10 @@ web_url = [
     path('em-atraso/', DividasEmAtrasoListView.as_view(), name='dividas-em-atraso'),
 ]
 
-api_url = []
+api_url = [
+    path('api/parcelas/', ParcelasListView.as_view(), name='listar-parcelas'),
+    path('api/parcela/<int:pk>/', ParcelaUpdateView.as_view(), name='editar-parcelas'),
+    path('api/parcela/many/', PayParcelaUpdateView.as_view(), name='pagar-parcelas'),
+]
 
 urlpatterns = web_url + api_url

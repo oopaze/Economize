@@ -58,16 +58,15 @@
 @media(max-width: 450px) {
     .navigation .menu ul .sidebar-control {
         font-size: 0.8rem;
-        display: initial;
+        display: flex;
         pointer-events: all;
         flex-basis: 15%;
-
     }
     .navigation .menu ul, .navigation{
         justify-content: space-around !important;
     }
     .navigation .menu ul li {
         flex-basis: 20%;
-        min-width: 60px;
+        min-width: 70px;
     }
 }

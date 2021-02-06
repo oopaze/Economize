@@ -4,9 +4,10 @@
 {% block title %} Home {% endblock %}
 
 {% block css %}
-    <link rel="stylesheet" href="{% static 'css/index/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index/table.css' %}">
     <link rel="stylesheet" href="{% static 'css/index/nav.css' %}">
     <link rel="stylesheet" href="{% static 'css/index/filtro.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index/index.css' %}">
     <style>
         #id_search_input{
             padding-left: 10px;
@@ -138,25 +139,7 @@
             <p>Gasto: <span class="money">R${{ total_gasto }}</span></p>
         </div>
     </div>
-    <form id="filter-content" style="display:none;" action="{% url 'home' %}" method="POST">
-        {% csrf_token %}
-        <div class="filter-input">
-            {{ form.min_value }}
-        </div>
-        <div class="filter-input">
-            {{ form.max_value }}
-        </div>
-        <div class="filter-input">
-            {{ form.mes_initial }}
-        </div>
-        <div class="filter-input">
-            {{ form.mes_final }}
-        </div>
-        <div class="search-hidden" style="display: none;">
-            {{ form.search_input }}
-        </div>
-        <button type="submit" class="btn btn-success">Filtrar</button>
-    </form>
+    {% include 'popover/popover_filter.html' %}
 {% endblock %}
 {% block js %}
     <script src="https://cdn.jsdelivr.net/jquery.webui-popover/1.2.1/jquery.webui-popover.min.js"></script>
@@ -189,7 +172,6 @@
                 $('.form-filtro').fadeToggle('fast', 'linear')
             })
         });
-        select_nav()
         $('#filter-bt').webuiPopover({
             placement:'bottom-right',
             url: '#filter-content',

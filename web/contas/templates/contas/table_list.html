@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Contas {% endblock %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/index/table.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index/nav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index/filtro.css' %}">
+    <link rel="stylesheet" href="{% static 'css/index/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/contas/contas.css' %}">
+    <style>
+        #id_search_input{
+            padding-left: 10px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.webui-popover/1.2.1/jquery.webui-popover.min.css">
+{% endblock %}
+
+{% block content %}
+    <section class="top-bar">
+        <a class="sidebar-control"><i class="mdi mdi-menu"></i></a>
+        <p class="title-page"> Consulta de Contas </p>
+        <a class="novo" href="#">
+            <i id="plus" class="mdi mdi-plus"></i>
+            <span>Nova Conta</span>  
+        </a>
+    </section>
+    {% include 'contas/components/table.html' %}
+{% endblock %}
+{% block js %}
+    <script src="https://cdn.jsdelivr.net/jquery.webui-popover/1.2.1/jquery.webui-popover.min.js"></script>
+    <script>
+        $('#filter-bt').webuiPopover({
+            placement:'bottom-right',
+            url: '#filter-content',
+            dismissible: false
+        });
+        $('.search > #id_search_input').on('input', function() {
+            var text = $(this).val()
+            $('.search-hidden > #id_search_input').val(text) 
+        })
+    </script>
+{% endblock %}

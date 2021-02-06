@@ -17,6 +17,25 @@ class Conta(models.Model):
     parcelas = models.PositiveIntegerField()
     data_compra = models.DateField()
 
+    def count_parcelas(self):
+        parcelas = self.parcelamento_set.all()
+        total = parcelas.count()
+        pago = parcelas.filter(pago=True).count()
+        return f"{pago}/{total}"
+    
+    def check_pago(self):
+        pago = self.parcelamento_set.filter(pago=False).count()
+        if pago > 0:
+            return False
+        return True
+    
+    def gasto():
+        value = sum(Conta.objects.all().values_list('preco', flat=True))
+        value = f"{value:,.2f}".replace(',', '|')
+        value = value.replace('.', ',')
+        value = value.replace('|', '.')
+        return value
+
 
 class Parcelamento(models.Model):
     parcela = models.IntegerField()
