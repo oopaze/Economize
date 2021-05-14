@@ -1,0 +1,6 @@
+{
+    "python.linting.pylintEnabled": true,
+    "python.linting.enabled": true,
+    "python.pythonPath": "/home/ze/projetos/Python/economize/bin/python3.7",
+    "python.linting.pylamaEnabled": false
+}
